@@ -1,0 +1,38 @@
+<div {{ attributes }}>
+    {{ form_start(form, { attr: {
+        'novalidate': true,
+        'data-action': 'live#action:prevent',
+        'data-live-action-param': 'save',
+        'id': 'new-RDV-form'
+    }}) }}
+
+    <div class="form-group">
+        {{ form_label(form.fichierAudio) }}
+        <div class="form-widget col-md-6 col-xxl-5">
+            {{ form_widget(form.fichierAudio) }}
+
+            <div class="form-text text-muted">
+                Fichier téléchargé :
+                {% if fichierAudioName %}
+                    {{ fichierAudioName }}
+                {% else %}
+                    (Aucun)
+                {% endif %}
+            </div>
+
+            {% if fichierAudioUploadError %}
+                <div class="invalid-feedback d-block">{{ fichierAudioUploadError }}</div>
+            {% endif %}
+
+            <button data-action="live#action" data-live-action-param="files(rdv[fichierAudio])|uploadFile"
+                    class="btn btn-primary">
+                Upload le fichier
+            </button>
+        </div>
+        {{ form_help(form.fichierAudio) }}
+        {{ form_errors(form.fichierAudio) }}
+    </div>
+
+    {{ form_end(form) }}
+
+</div>
